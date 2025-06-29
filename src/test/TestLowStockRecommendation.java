@@ -36,7 +36,7 @@ public class TestLowStockRecommendation {
             }
         }
 
-        // שלב 5: הרצה מחדש של האלגוריתם
+        // שלב 5: הרצה מחדש של האלגוריתם!
         List<Product> recommendedAfterChange = algo.recommend(products);
 
         System.out.println("\nRecommendations after updating stock:");
