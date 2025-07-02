@@ -1,0 +1,4 @@
+Milk,10,5,30
+Cheese,15,8,5
+Eggs,8,4,20
+Yogurt,9,4,10

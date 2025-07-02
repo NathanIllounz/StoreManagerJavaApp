@@ -3,7 +3,9 @@ package dao;
 import model.Product;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +35,19 @@ public class FileDaoImpl implements IDao{
         return products;
     }
     @Override
-    public void saveProducts(List<Product> products) {}
+    public void saveProducts(List<Product> products) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/datasource.txt"))) {
+            for (Product p : products) {
+                String line = p.getName() + "," +
+                        p.getSellingPrice() + "," +
+                        p.getBuyingPrice() + "," +
+                        p.getStock();
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
