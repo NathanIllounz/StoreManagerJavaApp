@@ -14,7 +14,7 @@ public class InventoryService {
     public List<Product> getAllProducts() {
         return dao.loadProducts();
     }
-    public void addProduct(Product p) {
+    public boolean addProduct(Product p) {
         List<Product> products = dao.loadProducts();
 
         // בדיקה אם קיים מוצר עם אותו שם
@@ -33,7 +33,7 @@ public class InventoryService {
         products.removeIf(p -> p.getName().equalsIgnoreCase(name));
         dao.saveProducts(products);
     }
-    public void UpdateProduct(Product updatedProduct) {
+    public void updateProduct(Product updatedProduct) {
         List<Product> products = dao.loadProducts();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getName().equalsIgnoreCase(updatedProduct.getName())) {

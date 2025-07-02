@@ -14,7 +14,7 @@ public class TestInventoryService {
         System.out.println("Before:");
         List<Product> products = service.getAllProducts();
         for (Product p : products) {
-            System.out.println(p.toString());
+            System.out.println(p);
         }
 
         // 2. הוספת מוצר חדש
@@ -23,7 +23,7 @@ public class TestInventoryService {
 
         // 3. עדכון מוצר קיים (שינוי מחירים ומלאי)
         Product updatedYogurt = new Product("Milk", 13, 5, 20);
-        service.UpdateProduct(updatedYogurt);
+        service.updateProduct(updatedYogurt);
 
         // 4. מחיקת מוצר אחר
         service.removeProduct("Eggs");
@@ -32,7 +32,7 @@ public class TestInventoryService {
         System.out.println("\nAfter:");
         List<Product> updated = service.getAllProducts();
         for (Product p : updated) {
-            System.out.println(p.toString());
+            System.out.println(p);
         }
     }
 }
