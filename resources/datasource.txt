@@ -1,4 +1,5 @@
-Milk,10,5,30
+Milk,13,5,20
 Cheese,15,8,5
-Eggs,8,4,20
 Yogurt,9,4,10
+Chips,9,4,10
+Car,9,4,10
