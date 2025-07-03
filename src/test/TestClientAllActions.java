@@ -42,5 +42,27 @@ public class TestClientAllActions {
                 System.out.println(p);
             }
         }
+        // ===== 5. RECOMMEND_LOW =====
+        Request lowRequest = new Request(null, "RECOMMEND_LOW", null);
+        Response lowResponse = client.sendRequest(lowRequest);
+        System.out.println("\nLOW STOCK Recommendation:");
+        System.out.println(lowResponse.getMessage());
+        if (lowResponse.isSuccess() && lowResponse.getData() != null) {
+            for (Product p : lowResponse.getData()) {
+                System.out.println(p);
+            }
+        }
+
+// ===== 6. RECOMMEND_PROFIT =====
+        Request profitRequest = new Request(null, "RECOMMEND_PROFIT", null);
+        Response profitResponse = client.sendRequest(profitRequest);
+        System.out.println("\nHIGH PROFIT Recommendation:");
+        System.out.println(profitResponse.getMessage());
+        if (profitResponse.isSuccess() && profitResponse.getData() != null) {
+            for (Product p : profitResponse.getData()) {
+                System.out.println(p);
+            }
+        }
+
     }
 }

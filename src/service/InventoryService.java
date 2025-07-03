@@ -1,5 +1,8 @@
 package service;
 
+import algorithm.impl.HighProfitRecommendation;
+import algorithm.impl.LowStockRecommendation;
+import algorithm.interfaces.IProductRecommendation;
 import dao.FileDaoImpl;
 import dao.IDao;
 import model.Product;
@@ -40,4 +43,14 @@ public class InventoryService {
         }
         dao.saveProducts(products);
     }
+    public List<Product> recommendLowStock() {
+        IProductRecommendation algo = new LowStockRecommendation();
+        return algo.recommend(dao.loadProducts());
+    }
+
+    public List<Product> recommendHighProfit() {
+        IProductRecommendation algo = new HighProfitRecommendation();
+        return algo.recommend(dao.loadProducts());
+    }
+
 }

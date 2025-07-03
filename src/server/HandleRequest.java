@@ -37,13 +37,21 @@ public class HandleRequest {
                 List<Product> products = service.getAllProducts();
                 return new Response(true, "Product list returned", products);
 
-            //case "RECOMMEND_LOW":
-            //    List<Product> low = service.recommendLowStock();
-            //    return new Response(true, "Low stock recommendation", low);
+            case "RECOMMEND_LOW":
+                List<Product> low = service.recommendLowStock();
+                String stockMsg = low.isEmpty()
+                        ? "No products found with low stock."
+                        : "Recommended to restock '" + low.get(0).getName() + "' — only " +
+                        low.get(0).getStock() + " units left in stock.";
+                return new Response(true, stockMsg, low);
 
-            //case "RECOMMEND_PROFIT":
-           //     List<Product> high = service.recommendHighProfit();
-            //    return new Response(true, "High profit recommendation", high);
+            case "RECOMMEND_PROFIT":
+                List<Product> high = service.recommendHighProfit();
+                String profitMsg = high.isEmpty()
+                        ? "No products found for high profit recommendation."
+                        : "Recommended to sell '" + high.get(0).getName() + "' — expected profit is " +
+                        (high.get(0).getSellingPrice() - high.get(0).getBuyingPrice()) + " per unit.";
+                return new Response(true, profitMsg, high);
 
             default:
                 return new Response(false, "Unknown action: " + action, null);
