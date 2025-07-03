@@ -26,7 +26,7 @@ public class TestInventoryService {
         service.updateProduct(updatedYogurt);
 
         // 4. מחיקת מוצר אחר
-        service.removeProduct("Eggs");
+        service.deleteProduct("Eggs");
 
         // 5. טעינה מחדש והצגת תוצאה
         System.out.println("\nAfter:");

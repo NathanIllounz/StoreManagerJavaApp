@@ -16,19 +16,16 @@ public class InventoryService {
     }
     public boolean addProduct(Product p) {
         List<Product> products = dao.loadProducts();
-
-        // בדיקה אם קיים מוצר עם אותו שם
-        boolean exists = products.stream()
-                .anyMatch(prod -> prod.getName().equalsIgnoreCase(p.getName()));
-
+        boolean exists = products.stream().anyMatch(prod -> prod.getName().equalsIgnoreCase(p.getName()));
         if (!exists) {
             products.add(p);
             dao.saveProducts(products);
+            return true;
         } else {
-            System.out.println("Product with name '" + p.getName() + "' already exists.");
+            return false;
         }
     }
-    public void removeProduct(String name ) {
+    public void deleteProduct(String name ) {
         List<Product> products = dao.loadProducts();
         products.removeIf(p -> p.getName().equalsIgnoreCase(name));
         dao.saveProducts(products);

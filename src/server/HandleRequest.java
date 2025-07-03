@@ -23,12 +23,15 @@ public class HandleRequest {
                 Product p = request.getProduct();
                 boolean added = service.addProduct(p); // תעדכן שתחזיר בוליאני
                 return new Response(added,
-                        added ? "Product added successfully" : "Product already exists",
+                        added ? "Product '" + p.getName() + "' added successfully"
+                                : "Product '" + p.getName() + "' already exists",
                         null);
 
             case "DELETE":
-                service.removeProduct(request.getTargetName());
-                return new Response(true, "Product deleted", null);
+                service.deleteProduct(request.getTargetName());
+                String name = request.getTargetName();
+                service.deleteProduct(name);
+                return new Response(true, "Product '" + name + "' deleted successfully", null);
 
             case "GET_ALL":
                 List<Product> products = service.getAllProducts();
