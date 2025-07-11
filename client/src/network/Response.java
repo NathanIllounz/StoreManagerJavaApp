@@ -1,6 +1,7 @@
 package network;
 
 import model.Product;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class Response implements Serializable {
     public List<Product> getData() {
         return data;
     }
+    public List<Product> getProducts() {return data;}
     public void setSuccess(boolean success) {
         this.success = success;
     }
