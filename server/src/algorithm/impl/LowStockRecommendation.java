@@ -13,7 +13,7 @@ public class LowStockRecommendation implements  IProductRecommendation {
     public List<Product> recommend(List<Product> products) {
         return products.stream()
                 .sorted(Comparator.comparingInt(Product::getStock)) // מיון לפי כמות במלאי מהנמוך לגבוה
-                .limit(3) // נחזיר עד 3 מוצרים בלבד
+                .limit(99) // נחזיר עד 99 מוצרים בלבד
                 .collect(Collectors.toList()); // נאסוף לרשימה חדשה
     }
 }

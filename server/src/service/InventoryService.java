@@ -32,15 +32,16 @@ public class InventoryService {
         products.removeIf(p -> p.getName().equalsIgnoreCase(name));
         dao.saveProducts(products);
     }
-    public void updateProduct(Product updatedProduct) {
+    public boolean updateProduct(Product updatedProduct) {
         List<Product> products = dao.loadProducts();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getName().equalsIgnoreCase(updatedProduct.getName())) {
                 products.set(i, updatedProduct);
-                break;
+                dao.saveProducts(products);
+                return true;
             }
         }
-        dao.saveProducts(products);
+        return false;
     }
     public List<Product> recommendLowStock() {
         IProductRecommendation algo = new LowStockRecommendation();
@@ -50,6 +51,16 @@ public class InventoryService {
     public List<Product> recommendHighProfit() {
         IProductRecommendation algo = new HighProfitRecommendation();
         return algo.recommend(dao.loadProducts());
+    }
+
+    public Product findProductByName(String name) {
+        List<Product> products = dao.loadProducts();
+        for (Product p : products) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                return p;
+            }
+        }
+        return null;
     }
 
 }

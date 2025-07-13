@@ -53,8 +53,26 @@ public class HandleRequest {
                         (high.get(0).getSellingPrice() - high.get(0).getBuyingPrice()) + " per unit.";
                 return new Response(true, profitMsg, high);
 
+            case "SEARCH":
+                String target = request.getTargetName();
+                Product found = service.findProductByName(target);
+                if (found != null) {
+                    return new Response(true, "Product found: " + found.getName(), List.of(found));
+                } else {
+                    return new Response(false, "Product not found: " + target, null);
+                }
+
+            case "UPDATE":
+                Product updated = request.getProduct();
+                boolean updatedOk = service.updateProduct(updated);
+                return new Response(updatedOk,
+                        updatedOk ? "Product '" + updated.getName() + "' updated." : "Product not found.",
+                        null);
+
+
             default:
                 return new Response(false, "Unknown action: " + action, null);
+
         }
     }
 }

@@ -15,7 +15,7 @@ public class HighProfitRecommendation implements IProductRecommendation {
                         (p2.getSellingPrice() - p2.getBuyingPrice()),
                         (p1.getSellingPrice() - p1.getBuyingPrice())
                 ))
-                .limit(5)
+                .limit(99)
                 .collect(Collectors.toList());
 
         }

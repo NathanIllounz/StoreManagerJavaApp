@@ -1,5 +1,4 @@
-Milk,13,5,20
 Cheese,15,8,5
 Yogurt,9,4,10
-Chips,9,4,10
-Car,9,4,10
+coca cola ,22,12,20
+soy milk,22,14,10
