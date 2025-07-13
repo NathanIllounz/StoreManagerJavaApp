@@ -50,7 +50,9 @@ Every update is automatically saved and reloaded.
 ## 📷 Screenshots *
 
 GUI screenshots here:
-![img.png](img.png)
+
+
+<img alt="Algorithm Recomandation" height="400" src="img.png" width="300"/>
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
