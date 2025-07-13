@@ -2,7 +2,6 @@ Bread,17,5,12
 Lettuce,37,28,79
 Yogurt,27,14,77
 Carrot,25,20,49
-Potato,44,28,98
 Deodorant,23,19,50
 beef,36,26,50
 Lettuce,29,11,39
@@ -25,7 +24,6 @@ Detergent,20,9,53
 Yogurt,24,23,33
 Salt,9,4,7
 Cheese,11,10,100
-Potato,35,29,53
 Beer,31,22,42
 Crackers,26,25,22
 Soda,42,22,32
@@ -34,12 +32,10 @@ Orange,18,9,91
 Lotion,15,5,73
 Wine,26,13,71
 Soap,24,23,10
-Potato,12,6,100
 Deodorant,23,18,70
 Soap,21,7,52
 Shampoo,37,23,15
 Lettuce,23,21,37
-Potato,28,16,67
 Candy,24,13,10
 Tomato,26,24,32
 Nuts,32,15,69
@@ -120,7 +116,6 @@ Bleach,16,11,56
 Beef,23,5,68
 Sugar,28,16,32
 Chicken,39,29,10
-Potato,18,13,55
 Cucumber,19,15,66
 Chocolate,22,9,32
 Wine,36,25,9
@@ -191,10 +186,10 @@ Coffee,8,4,28
 Lotion,41,25,8
 Coffee,31,15,10
 Tissues,18,16,38
-Potato,39,27,30
 Bleach,16,13,30
 Cake,10,2,52
 Cheese,31,27,27
 Soda,16,8,44
 Pepper,17,5,37
 Soap,25,21,86
+Coca Cola,12,6,24

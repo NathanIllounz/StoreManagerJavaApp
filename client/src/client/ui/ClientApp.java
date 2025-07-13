@@ -2,6 +2,10 @@ package client.ui;
 
 import client.socket.ClientSocket;
 import javafx.application.Application;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -14,23 +18,21 @@ import java.util.List;
 
 public class ClientApp extends Application {
 
-    private TextArea outputArea = new TextArea();
+    private TableView<Product> tableView;
+    private ObservableList<Product> productList;
 
     @Override
     public void start(Stage primaryStage) {
         TabPane tabPane = new TabPane();
 
         Tab addTab = new Tab("Add Product", buildAddProductTab());
-        Tab getAllTab = new Tab("Get All Products", buildGetAllTab());
-        Tab searchTab = new Tab("Search & Update/Delete", buildSearchTab());
+        Tab getAllTab = new Tab("Manage Products", buildProductTableTab());
         Tab recommendationTab = new Tab("Recommendations", buildRecommendationTab());
 
-        tabPane.getTabs().addAll(addTab, getAllTab, searchTab, recommendationTab);
+        tabPane.getTabs().addAll(addTab, getAllTab, recommendationTab);
 
-        outputArea.setEditable(false);
         VBox root = new VBox(tabPane);
-
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 800, 600);
         primaryStage.setTitle("Store Manager Client");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -44,11 +46,25 @@ public class ClientApp extends Application {
         Button addButton = new Button("Add");
 
         addButton.setOnAction(e -> {
-            if (nameField.getText().isBlank() || buyField.getText().isBlank()
-                    || sellField.getText().isBlank() || stockField.getText().isBlank()) {
-                showAlert("Add Product Error", "Please fill in all fields before adding the product.");
+            boolean hasError = false;
+            if (nameField.getText().isBlank()) {
+                nameField.setStyle("-fx-border-color: red;"); hasError = true;
+            } else nameField.setStyle("");
+            if (buyField.getText().isBlank()) {
+                buyField.setStyle("-fx-border-color: red;"); hasError = true;
+            } else buyField.setStyle("");
+            if (sellField.getText().isBlank()) {
+                sellField.setStyle("-fx-border-color: red;"); hasError = true;
+            } else sellField.setStyle("");
+            if (stockField.getText().isBlank()) {
+                stockField.setStyle("-fx-border-color: red;"); hasError = true;
+            } else stockField.setStyle("");
+
+            if (hasError) {
+                showAlert("Add Product Error", "Please fill in all fields.");
                 return;
             }
+
             try {
                 Product p = new Product(
                         nameField.getText(),
@@ -59,7 +75,7 @@ public class ClientApp extends Application {
                 Response res = ClientSocket.sendRequest(new Request(p, "ADD", null));
                 showAlert("Add Product", res.getMessage());
             } catch (Exception ex) {
-                showAlert("Invalid Input", "Please enter valid numbers in all fields.");
+                showAlert("Invalid Input", "Please enter valid numbers.");
             }
         });
 
@@ -72,121 +88,106 @@ public class ClientApp extends Application {
         );
     }
 
-    private Pane buildGetAllTab() {
-        Button getAllButton = new Button("Refresh Products");
-        TextArea resultArea = new TextArea();
-        resultArea.setEditable(false);
-
-        getAllButton.setOnAction(e -> {
-            Response res = ClientSocket.sendRequest(new Request(null, "GET_ALL", null));
-            if (res.isSuccess() && res.getProducts() != null) {
-                StringBuilder sb = new StringBuilder("Products:\n");
-                for (Product p : res.getProducts()) {
-                    sb.append("- ").append(p.getName())
-                            .append(" | Buy: ").append(p.getBuyingPrice())
-                            .append(" | Sell: ").append(p.getSellingPrice())
-                            .append(" | Stock: ").append(p.getStock())
-                            .append("\n");
-                }
-                resultArea.setText(sb.toString());
-            } else {
-                resultArea.setText("Failed to fetch products: " + res.getMessage());
-            }
-        });
-
-        return new VBox(10, getAllButton, resultArea);
-    }
-
-    private Pane buildSearchTab() {
+    private Pane buildProductTableTab() {
         VBox layout = new VBox(10);
 
-        TextField searchField = new TextField();
-        Button searchButton = new Button("Search");
+        tableView = new TableView<>();
+        productList = FXCollections.observableArrayList();
 
-        TextField buyField = new TextField();
-        TextField sellField = new TextField();
-        TextField stockField = new TextField();
+        TableColumn<Product, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
 
-        Button updateButton = new Button("Update");
-        Button deleteButton = new Button("Delete");
+        TableColumn<Product, Integer> buyCol = new TableColumn<>("Buy Price");
+        buyCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBuyingPrice()).asObject());
 
-        buyField.setDisable(true);
-        sellField.setDisable(true);
-        stockField.setDisable(true);
-        updateButton.setDisable(true);
-        deleteButton.setDisable(true);
+        TableColumn<Product, Integer> sellCol = new TableColumn<>("Sell Price");
+        sellCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getSellingPrice()).asObject());
 
-        searchButton.setOnAction(e -> {
-            String name = searchField.getText();
-            if (name.isBlank()) {
-                showAlert("Search Error", "Please enter a product name.");
+        TableColumn<Product, Integer> stockCol = new TableColumn<>("Stock");
+        stockCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getStock()).asObject());
+
+        tableView.getColumns().addAll(nameCol, buyCol, sellCol, stockCol);
+        tableView.setItems(productList);
+
+        Button refreshButton = new Button("Refresh");
+        Button editButton = new Button("Edit Selected");
+        Button deleteButton = new Button("Delete Selected");
+
+        refreshButton.setOnAction(e -> refreshProducts());
+
+        editButton.setOnAction(e -> {
+            Product selected = tableView.getSelectionModel().getSelectedItem();
+            if (selected == null) {
+                showAlert("Edit", "Please select a product to edit.");
                 return;
             }
-
-            Response res = ClientSocket.sendRequest(new Request(null, "SEARCH", name));
-            if (res.isSuccess() && res.getProducts() != null && !res.getProducts().isEmpty()) {
-                Product p = res.getProducts().get(0);
-                buyField.setText(String.valueOf(p.getBuyingPrice()));
-                sellField.setText(String.valueOf(p.getSellingPrice()));
-                stockField.setText(String.valueOf(p.getStock()));
-
-                buyField.setDisable(false);
-                sellField.setDisable(false);
-                stockField.setDisable(false);
-                updateButton.setDisable(false);
-                deleteButton.setDisable(false);
-
-                showAlert("Search", "Product found: " + p.getName());
-            } else {
-                showAlert("Search", "Product '" + name + "' not found.");
-                buyField.clear(); sellField.clear(); stockField.clear();
-                buyField.setDisable(true); sellField.setDisable(true); stockField.setDisable(true);
-                updateButton.setDisable(true); deleteButton.setDisable(true);
-            }
-        });
-
-        updateButton.setOnAction(e -> {
-            if (buyField.getText().isBlank() || sellField.getText().isBlank() || stockField.getText().isBlank()) {
-                showAlert("Update Error", "Please fill in all fields before updating the product.");
-                return;
-            }
-            try {
-                Product updated = new Product(
-                        searchField.getText(),
-                        Integer.parseInt(sellField.getText()),
-                        Integer.parseInt(buyField.getText()),
-                        Integer.parseInt(stockField.getText())
-                );
-                Response res = ClientSocket.sendRequest(new Request(updated, "UPDATE", null));
-                showAlert("Update", res.getMessage());
-            } catch (Exception ex) {
-                showAlert("Invalid Input", "Please enter valid numbers.");
-            }
+            showEditDialog(selected);
         });
 
         deleteButton.setOnAction(e -> {
-            String name = searchField.getText();
-            if (name.isBlank()) {
-                showAlert("Delete Error", "No product selected.");
+            Product selected = tableView.getSelectionModel().getSelectedItem();
+            if (selected == null) {
+                showAlert("Delete", "Please select a product to delete.");
                 return;
             }
-            Response res = ClientSocket.sendRequest(new Request(null, "DELETE", name));
+            Response res = ClientSocket.sendRequest(new Request(null, "DELETE", selected.getName()));
             showAlert("Delete", res.getMessage());
-
-            buyField.clear(); sellField.clear(); stockField.clear();
-            buyField.setDisable(true); sellField.setDisable(true); stockField.setDisable(true);
-            updateButton.setDisable(true); deleteButton.setDisable(true);
+            refreshProducts();
         });
 
-        layout.getChildren().addAll(
-                new Label("Search product by name:"), searchField, searchButton,
+        layout.getChildren().addAll(new HBox(10, refreshButton, editButton, deleteButton), tableView);
+        refreshProducts();
+        return layout;
+    }
+
+    private void refreshProducts() {
+        Response res = ClientSocket.sendRequest(new Request(null, "GET_ALL", null));
+        if (res.isSuccess()) {
+            productList.setAll(res.getProducts());
+        } else {
+            showAlert("Error", "Failed to load products: " + res.getMessage());
+        }
+    }
+
+    private void showEditDialog(Product product) {
+        Dialog<Product> dialog = new Dialog<>();
+        dialog.setTitle("Edit Product: " + product.getName());
+
+        TextField buyField = new TextField(String.valueOf(product.getBuyingPrice()));
+        TextField sellField = new TextField(String.valueOf(product.getSellingPrice()));
+        TextField stockField = new TextField(String.valueOf(product.getStock()));
+
+        VBox content = new VBox(10,
                 new Label("Buy Price:"), buyField,
                 new Label("Sell Price:"), sellField,
-                new Label("Stock:"), stockField,
-                new HBox(10, updateButton, deleteButton)
+                new Label("Stock:"), stockField
         );
 
-        return layout;
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        dialog.setResultConverter(button -> {
+            if (button == ButtonType.OK) {
+                try {
+                    Product updated = new Product(
+                            product.getName(),
+                            Integer.parseInt(sellField.getText()),
+                            Integer.parseInt(buyField.getText()),
+                            Integer.parseInt(stockField.getText())
+                    );
+                    return updated;
+                } catch (Exception e) {
+                    showAlert("Error", "Invalid input.");
+                }
+            }
+            return null;
+        });
+
+        dialog.showAndWait().ifPresent(updatedProduct -> {
+            Response res = ClientSocket.sendRequest(new Request(updatedProduct, "UPDATE", null));
+            showAlert("Update", res.getMessage());
+            refreshProducts();
+        });
     }
 
     private Pane buildRecommendationTab() {
