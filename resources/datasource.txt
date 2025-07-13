@@ -1,6 +1,5 @@
 Bread,17,5,12
-Lettuce,37,28,79
-Yogurt,27,14,77
+Lettuce,23,11,39
 Carrot,25,20,49
 Deodorant,23,19,50
 beef,36,26,50
@@ -21,7 +20,6 @@ Fish,12,6,59
 Oil,16,11,65
 Bleach,28,23,24
 Detergent,20,9,53
-Yogurt,24,23,33
 Salt,9,4,7
 Cheese,11,10,100
 Beer,31,22,42
@@ -42,7 +40,6 @@ Nuts,32,15,69
 Lotion,10,9,16
 ToiletPaper,33,15,13
 Oil,37,29,59
-Yogurt,25,19,18
 Coffee,25,22,31
 Deodorant,33,18,96
 Bread,19,8,26
@@ -75,7 +72,6 @@ Tomato,29,27,32
 Rice,43,23,3
 Tomato,40,29,81
 Deodorant,29,19,0
-Yogurt,28,18,36
 Water,31,29,17
 Crackers,34,28,48
 Onion,22,13,100
@@ -92,7 +88,6 @@ Detergent,24,18,96
 Butter,12,3,2
 Cookies,17,3,98
 Detergent,22,10,17
-Banana,44,27,34
 Chocolate,19,16,43
 Oil,41,29,93
 Bread,31,19,17
@@ -105,7 +100,6 @@ Carrot,28,12,46
 Juice,31,13,66
 Coffee,37,26,10
 ToiletPaper,33,26,36
-Banana,23,15,68
 Crackers,31,15,88
 Water,38,24,56
 ToiletPaper,20,19,19
@@ -169,7 +163,6 @@ Rice,36,30,43
 ToiletPaper,15,10,68
 IceCream,27,25,46
 Bread,14,7,40
-Yogurt,28,13,25
 Chips,27,8,73
 Detergent,22,9,3
 ToiletPaper,29,23,85
@@ -193,3 +186,5 @@ Soda,16,8,44
 Pepper,17,5,37
 Soap,25,21,86
 Coca Cola,12,6,24
+apple of mamoush,6,5,20
+cola,12,7,50

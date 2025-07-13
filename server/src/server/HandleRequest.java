@@ -24,7 +24,7 @@ public class HandleRequest {
                 boolean added = service.addProduct(p); // תעדכן שתחזיר בוליאני
                 return new Response(added,
                         added ? "Product '" + p.getName() + "' added successfully"
-                                : "Product '" + p.getName() + "' already exists",
+                                : "Product '" + p.getName() + "' already exists\n Go to Manage Products",
                         null);
 
             case "DELETE":
