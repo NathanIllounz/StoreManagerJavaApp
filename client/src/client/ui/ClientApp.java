@@ -22,16 +22,15 @@ public class ClientApp extends Application {
 
         Tab addTab = new Tab("Add Product", buildAddProductTab());
         Tab getAllTab = new Tab("Get All Products", buildGetAllTab());
-        Tab searchTab = new Tab("Search Product", buildSearchTab());
-        Tab recTab = new Tab("Recommendations", buildRecommendationTab());
+        Tab searchTab = new Tab("Search & Update/Delete", buildSearchTab());
+        Tab recommendationTab = new Tab("Recommendations", buildRecommendationTab());
 
-
-        tabPane.getTabs().addAll(addTab, getAllTab, searchTab, recTab);
+        tabPane.getTabs().addAll(addTab, getAllTab, searchTab, recommendationTab);
 
         outputArea.setEditable(false);
-        VBox root = new VBox(tabPane, outputArea);
+        VBox root = new VBox(tabPane);
 
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 600, 600);
         primaryStage.setTitle("Store Manager Client");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -45,6 +44,11 @@ public class ClientApp extends Application {
         Button addButton = new Button("Add");
 
         addButton.setOnAction(e -> {
+            if (nameField.getText().isBlank() || buyField.getText().isBlank()
+                    || sellField.getText().isBlank() || stockField.getText().isBlank()) {
+                showAlert("Add Product Error", "Please fill in all fields before adding the product.");
+                return;
+            }
             try {
                 Product p = new Product(
                         nameField.getText(),
@@ -55,101 +59,17 @@ public class ClientApp extends Application {
                 Response res = ClientSocket.sendRequest(new Request(p, "ADD", null));
                 showAlert("Add Product", res.getMessage());
             } catch (Exception ex) {
-                outputArea.setText("Invalid input.");
+                showAlert("Invalid Input", "Please enter valid numbers in all fields.");
             }
         });
 
-        VBox box = new VBox(10,
+        return new VBox(10,
                 new Label("Name:"), nameField,
                 new Label("Buy Price:"), buyField,
                 new Label("Sell Price:"), sellField,
                 new Label("Stock:"), stockField,
                 addButton
         );
-        return box;
-    }
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private Pane buildRecommendationTab() {
-        VBox layout = new VBox(10);
-
-        // שדה להזנת מספר מוצרים להחזיר
-        TextField limitField = new TextField();
-        limitField.setPromptText("Number of products (e.g. 2 / 5 / 10 or 'all')");
-
-        // כפתורים
-        Button lowStockBtn = new Button("Recommend Low Stock");
-        Button highProfitBtn = new Button("Recommend High Profit");
-
-        TextArea resultArea = new TextArea();
-        resultArea.setEditable(false);
-
-        // פעולה כללית עם פרמטרים
-        lowStockBtn.setOnAction(e -> {
-            handleRecommendation("RECOMMEND_LOW", limitField.getText(), resultArea);
-        });
-
-        highProfitBtn.setOnAction(e -> {
-            handleRecommendation("RECOMMEND_PROFIT", limitField.getText(), resultArea);
-        });
-
-        layout.getChildren().addAll(
-                new Label("How many products to return:"),
-                limitField,
-                lowStockBtn,
-                highProfitBtn,
-                resultArea
-        );
-
-        return layout;
-    }
-
-    private void handleRecommendation(String action, String limitInput, TextArea outputArea) {
-        Response res = ClientSocket.sendRequest(new Request(null, action, null));
-        if (!res.isSuccess() || res.getProducts() == null) {
-            outputArea.setText("Failed to fetch recommendation: " + res.getMessage());
-            return;
-        }
-
-        List<Product> products = res.getProducts();
-
-        // סינון לפי מספר תוצאות (אם לא "all")
-        if (!limitInput.isBlank() && !limitInput.equalsIgnoreCase("all")) {
-            try {
-                int limit = Integer.parseInt(limitInput.trim());
-                if (limit < products.size()) {
-                    products = products.subList(0, limit);
-                }
-            } catch (Exception ex) {
-                outputArea.setText("Invalid limit. Please enter a number or 'all'.");
-                return;
-            }
-        }
-
-        // הדפסת התוצאות
-        StringBuilder sb = new StringBuilder();
-        if (action.equals("RECOMMEND_LOW")) {
-            sb.append("Low Stock Recommendation:\n");
-            for (Product p : products) {
-                sb.append("- ").append(p.getName())
-                        .append(" (stock: ").append(p.getStock()).append(")\n");
-            }
-        } else {
-            sb.append("High Profit Recommendation:\n");
-            for (Product p : products) {
-                int profit = p.getSellingPrice() - p.getBuyingPrice();
-                sb.append("- ").append(p.getName())
-                        .append(" (profit: ").append(profit).append(")\n");
-            }
-        }
-
-        outputArea.setText(sb.toString());
     }
 
     private Pane buildGetAllTab() {
@@ -174,8 +94,7 @@ public class ClientApp extends Application {
             }
         });
 
-        VBox layout = new VBox(10, getAllButton, resultArea);
-        return layout;
+        return new VBox(10, getAllButton, resultArea);
     }
 
     private Pane buildSearchTab() {
@@ -191,9 +110,6 @@ public class ClientApp extends Application {
         Button updateButton = new Button("Update");
         Button deleteButton = new Button("Delete");
 
-        Label statusLabel = new Label();
-
-        // התחלה - הכל כבוי
         buyField.setDisable(true);
         sellField.setDisable(true);
         stockField.setDisable(true);
@@ -203,7 +119,7 @@ public class ClientApp extends Application {
         searchButton.setOnAction(e -> {
             String name = searchField.getText();
             if (name.isBlank()) {
-                statusLabel.setText("Please enter a product name.");
+                showAlert("Search Error", "Please enter a product name.");
                 return;
             }
 
@@ -220,18 +136,20 @@ public class ClientApp extends Application {
                 updateButton.setDisable(false);
                 deleteButton.setDisable(false);
 
-                statusLabel.setText("Product found: " + p.getName());
+                showAlert("Search", "Product found: " + p.getName());
             } else {
-                statusLabel.setText("Product not found.");
-                buyField.setDisable(true);
-                sellField.setDisable(true);
-                stockField.setDisable(true);
-                updateButton.setDisable(true);
-                deleteButton.setDisable(true);
+                showAlert("Search", "Product '" + name + "' not found.");
+                buyField.clear(); sellField.clear(); stockField.clear();
+                buyField.setDisable(true); sellField.setDisable(true); stockField.setDisable(true);
+                updateButton.setDisable(true); deleteButton.setDisable(true);
             }
         });
 
         updateButton.setOnAction(e -> {
+            if (buyField.getText().isBlank() || sellField.getText().isBlank() || stockField.getText().isBlank()) {
+                showAlert("Update Error", "Please fill in all fields before updating the product.");
+                return;
+            }
             try {
                 Product updated = new Product(
                         searchField.getText(),
@@ -242,20 +160,19 @@ public class ClientApp extends Application {
                 Response res = ClientSocket.sendRequest(new Request(updated, "UPDATE", null));
                 showAlert("Update", res.getMessage());
             } catch (Exception ex) {
-                statusLabel.setText("Invalid input.");
+                showAlert("Invalid Input", "Please enter valid numbers.");
             }
         });
 
         deleteButton.setOnAction(e -> {
             String name = searchField.getText();
             if (name.isBlank()) {
-                statusLabel.setText("No product selected.");
+                showAlert("Delete Error", "No product selected.");
                 return;
             }
             Response res = ClientSocket.sendRequest(new Request(null, "DELETE", name));
             showAlert("Delete", res.getMessage());
 
-            // נקה את השדות
             buyField.clear(); sellField.clear(); stockField.clear();
             buyField.setDisable(true); sellField.setDisable(true); stockField.setDisable(true);
             updateButton.setDisable(true); deleteButton.setDisable(true);
@@ -266,11 +183,84 @@ public class ClientApp extends Application {
                 new Label("Buy Price:"), buyField,
                 new Label("Sell Price:"), sellField,
                 new Label("Stock:"), stockField,
-                new HBox(10, updateButton, deleteButton),
-                statusLabel
+                new HBox(10, updateButton, deleteButton)
         );
 
         return layout;
+    }
+
+    private Pane buildRecommendationTab() {
+        VBox layout = new VBox(10);
+
+        TextField limitField = new TextField();
+        limitField.setPromptText("Number of products (e.g. 2 / 5 / 10 or 'all')");
+
+        Button lowStockBtn = new Button("Recommend Low Stock");
+        Button highProfitBtn = new Button("Recommend High Profit");
+
+        TextArea resultArea = new TextArea();
+        resultArea.setEditable(false);
+
+        lowStockBtn.setOnAction(e -> handleRecommendation("RECOMMEND_LOW", limitField.getText(), resultArea));
+        highProfitBtn.setOnAction(e -> handleRecommendation("RECOMMEND_PROFIT", limitField.getText(), resultArea));
+
+        layout.getChildren().addAll(
+                new Label("How many products to return:"),
+                limitField,
+                lowStockBtn,
+                highProfitBtn,
+                resultArea
+        );
+
+        return layout;
+    }
+
+    private void handleRecommendation(String action, String limitInput, TextArea outputArea) {
+        Response res = ClientSocket.sendRequest(new Request(null, action, null));
+        if (!res.isSuccess() || res.getProducts() == null) {
+            outputArea.setText("Failed to fetch recommendation: " + res.getMessage());
+            return;
+        }
+
+        List<Product> products = res.getProducts();
+
+        if (!limitInput.isBlank() && !limitInput.equalsIgnoreCase("all")) {
+            try {
+                int limit = Integer.parseInt(limitInput.trim());
+                if (limit < products.size()) {
+                    products = products.subList(0, limit);
+                }
+            } catch (Exception ex) {
+                outputArea.setText("Invalid limit. Please enter a number or 'all'.");
+                return;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        if (action.equals("RECOMMEND_LOW")) {
+            sb.append("Low Stock Recommendation:\n");
+            for (Product p : products) {
+                sb.append("- ").append(p.getName())
+                        .append(" (stock: ").append(p.getStock()).append(")\n");
+            }
+        } else {
+            sb.append("High Profit Recommendation:\n");
+            for (Product p : products) {
+                int profit = p.getSellingPrice() - p.getBuyingPrice();
+                sb.append("- ").append(p.getName())
+                        .append(" (profit: ").append(profit).append(")\n");
+            }
+        }
+
+        outputArea.setText(sb.toString());
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {
