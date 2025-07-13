@@ -1,55 +1,60 @@
-# 🧾 StoreManagerJavaApp
+# 🛒 StoreManagerJavaApp
 
-Java client-server inventory management system with algorithmic recommendations.  
-This project was built as part of a final course assignment.
+**StoreManagerJavaApp** is a Java-based client-server application that helps a small business owner manage inventory, view statistics, and receive smart product recommendations.
 
----
+## 📦 Project Structure
 
-## 📦 Features
+- `server/` - Contains the business logic, algorithm implementations, and file-based database access.
+- `client/` - A JavaFX-based user interface for interacting with the system.
 
-- Manage product inventory (add, delete, update, view)
-- Track income & expenses
-- Recommend what products to reorder
-- Recommend products with highest profit margins
-- GUI using JavaFX
-- Server-Client communication using TCP Sockets
-- JSON-based request/response protocol
-- Layered architecture with DAO, Service, Controller
+## 🧠 Features
 
----
+- 🔄 Add, update, delete, and search for products
+- 📋 View a full list of products (including buy/sell prices and stock)
+- 🧠 Smart recommendation algorithms:
+    - Low stock recommendation
+    - High profit recommendation
+    - Adjustable result limits (e.g., top 5 or all)
+- 🔔 Popup messages for success/failure feedback
+- 🧪 Testable modular structure
 
-## 🧠 Project Structure
+## 📊 Technologies Used
 
-| Path | File | Type | Purpose |
-|------|------|------|---------|
-| `algorithm/interfaces/` | `IProductRecommendation.java` | Interface | Contract for recommendation logic |
-| `algorithm/impl/` | `LowStockRecommendation.java` | Class | Recommends products low in stock |
-| `algorithm/impl/` | `HighProfitRecommendation.java` | Class | Recommends high-profit products |
-| `model/` | `Product.java`, `FinanceRecord.java` | Class | Data models |
-| `dao/` | `IDao.java` | Interface | Data access contract |
-| `dao/` | `FileDaoImpl.java` | Class | File-based data storage |
-| `service/` | `InventoryService.java` | Class | Business logic |
-| `server/` | `Server.java`, `HandleRequest.java` | Class | TCP server components |
-| `client/ui/` | `ClientApp.java` | Class | JavaFX UI |
-| `client/socket/` | `ClientSocket.java` | Class | TCP client communication |
-| `controller/` | `InventoryController.java` | Class | Connects request to logic |
-| `network/` | `Request.java`, `Response.java` | Class | JSON request/response |
-| `test/` | `ServiceTest.java`, `RecommendationTest.java` | Class | Unit tests |
+- Java 17+
+- JavaFX (GUI)
+- File-based storage (no DB)
+- Socket programming (ObjectInput/Output Streams)
+- MVC design principles
 
----
+## ▶️ How to Run
 
-## 🔧 Technologies Used
+### Server
 
-- Java 11+
-- JavaFX
-- Sockets (TCP)
-- Gson (for JSON)
-- JUnit 5
+1. Open the `server/` module in IntelliJ
+2. Run the class: `server.Server`
 
----
+### Client
 
-## 🧪 Still in Development
+1. Open the `client/` module
+2. Make sure JavaFX is configured:
+    - Add `--module-path` and `--add-modules javafx.controls,javafx.fxml` in Run Configuration
+3. Run the class: `client.ui.ClientApp`
 
-This is a work in progress!  
-More features, algorithms, and GUI functionality are being added step by step.
+> 💡 Note: Always start the **server first**, then the **client**.
 
+## 📁 Data
+
+All product data is stored in a text file at:
+Every update is automatically saved and reloaded.
+
+## 📷 Screenshots *
+
+GUI screenshots here:
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+## 👨‍💻 Author
+
+Nathan Illouz  
+Computer Science Student | Junior Software Developer  

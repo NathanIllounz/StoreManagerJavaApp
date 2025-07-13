@@ -2,3 +2,4 @@ Cheese,15,8,5
 Yogurt,9,4,10
 coca cola ,22,12,20
 soy milk,22,14,10
+Milk,5,2,20
