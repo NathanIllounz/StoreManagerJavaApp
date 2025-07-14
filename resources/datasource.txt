@@ -1,190 +1,200 @@
-Bread,17,5,12
-Lettuce,23,11,39
-Carrot,25,20,49
-Deodorant,23,19,50
-beef,36,26,50
-Lettuce,29,11,39
-Shampoo,36,21,12
-Salt,27,24,31
-Milk,16,13,41
-Detergent,19,18,57
-Oil,12,10,21
-Wine,39,27,33
-Water,23,11,73
-Juice,25,24,11
-Butter,20,19,5
-Pepper,35,15,26
-Razor,29,24,60
-Carrot,40,20,36
-Fish,12,6,59
-Oil,16,11,65
-Bleach,28,23,24
-Detergent,20,9,53
-Salt,9,4,7
-Cheese,11,10,100
-Beer,31,22,42
-Crackers,26,25,22
-Soda,42,22,32
-Lettuce,5,3,24
-Orange,18,9,91
-Lotion,15,5,73
-Wine,26,13,71
-Soap,24,23,10
-Deodorant,23,18,70
-Soap,21,7,52
-Shampoo,37,23,15
-Lettuce,23,21,37
-Candy,24,13,10
-Tomato,26,24,32
-Nuts,32,15,69
-Lotion,10,9,16
-ToiletPaper,33,15,13
-Oil,37,29,59
-Coffee,25,22,31
-Deodorant,33,18,96
-Bread,19,8,26
-Shampoo,50,30,62
-Crackers,30,15,26
-Tissues,19,4,73
-Salt,32,12,58
-Soap,7,4,60
-Oil,34,17,19
-Tea,28,10,60
-Apple,42,27,52
-Oil,46,27,83
-IceCream,18,10,34
-Juice,26,22,43
-Cucumber,28,10,71
-Crackers,25,23,48
-Tomato,27,25,39
-Tissues,18,9,64
-Razor,29,11,65
-Vinegar,18,3,14
-Cake,10,8,42
-Oil,12,4,51
-Water,30,26,51
-Bread,37,19,31
-Cucumber,19,6,20
-Tea,42,27,85
-Chicken,39,30,4
-Wine,30,25,0
-Tomato,29,27,32
-Rice,43,23,3
-Tomato,40,29,81
-Deodorant,29,19,0
-Water,31,29,17
-Crackers,34,28,48
-Onion,22,13,100
-Salt,25,9,91
-Cake,15,13,5
-Toothpaste,35,25,84
-Bleach,15,13,16
-Sugar,36,27,97
-Chips,35,29,72
-Toothpaste,8,7,18
-Coffee,14,12,25
-Razor,7,2,11
-Detergent,24,18,96
-Butter,12,3,2
-Cookies,17,3,98
-Detergent,22,10,17
-Chocolate,19,16,43
-Oil,41,29,93
-Bread,31,19,17
-Deodorant,41,25,43
-Tissues,29,20,76
-Tissues,33,13,59
-Oil,35,16,25
-Crackers,20,5,4
-Carrot,28,12,46
-Juice,31,13,66
-Coffee,37,26,10
-ToiletPaper,33,26,36
-Crackers,31,15,88
-Water,38,24,56
-ToiletPaper,20,19,19
-Pasta,25,11,91
-Soda,36,17,44
-Cookies,35,19,35
-Bleach,16,11,56
-Beef,23,5,68
-Sugar,28,16,32
-Chicken,39,29,10
-Cucumber,19,15,66
-Chocolate,22,9,32
-Wine,36,25,9
-Vinegar,37,24,89
-Nuts,19,10,5
-Nuts,20,13,62
-Candy,33,21,74
-Wine,48,29,31
-Nuts,39,21,78
-Chocolate,20,19,63
-Lotion,24,15,23
-Salt,35,15,60
-Lotion,33,18,40
-Beef,26,11,54
-Bread,12,6,14
-IceCream,34,21,80
-Bleach,14,3,60
-Bleach,12,8,59
-Nuts,33,22,3
-Beef,29,28,36
-Apple,24,10,60
-Bread,23,15,41
-Fish,20,10,38
-Fish,28,26,70
-Soda,31,22,81
-Vinegar,37,25,63
-Pasta,28,12,95
-Cucumber,25,24,64
-Pepper,14,7,18
-Lettuce,30,12,58
-Onion,14,10,81
-Beer,34,19,37
-Onion,7,5,77
-Coffee,31,28,49
-IceCream,22,13,39
-Orange,38,28,6
-Pasta,14,7,35
-Water,21,11,63
-Bleach,32,21,1
-Detergent,18,4,8
-Tissues,37,25,69
-IceCream,25,23,9
-Sugar,30,26,14
-Chocolate,40,26,65
-Tomato,34,25,55
-Rice,11,8,17
-Butter,39,19,99
-Tea,13,2,4
-Tomato,29,26,60
-Rice,36,30,43
-ToiletPaper,15,10,68
-IceCream,27,25,46
-Bread,14,7,40
-Chips,27,8,73
-Detergent,22,9,3
-ToiletPaper,29,23,85
-Orange,30,13,35
-Toothpaste,35,16,89
-Candy,22,21,68
-Onion,38,27,0
-Cucumber,24,14,66
-Cookies,31,26,15
-Lotion,13,9,49
-Beer,20,4,48
-Soap,30,14,82
-Coffee,8,4,28
-Lotion,41,25,8
-Coffee,31,15,10
-Tissues,18,16,38
-Bleach,16,13,30
-Cake,10,2,52
-Cheese,31,27,27
-Soda,16,8,44
-Pepper,17,5,37
-Soap,25,21,86
-Coca Cola,12,6,24
-apple of mamoush,6,5,20
-cola,12,7,50
+Coca Cola 1L,28,16,62
+Coca Cola 2L,23,6,4
+Diet Cola 1.5L,48,42,6
+Sprite 1L,20,10,15
+Sprite 2L,33,11,45
+Fanta Orange 1L,11,9,7
+Fanta Lemon 2L,33,22,78
+Pepsi Max 1.5L,40,18,70
+7Up 2L,49,12,74
+Mountain Dew 1L,32,6,63
+Lipton Ice Tea Peach 1.5L,35,9,70
+Lipton Ice Tea Lemon 1.5L,15,8,54
+Water Mineral 0.5L,14,6,91
+Water Mineral 1.5L,22,6,8
+Sparkling Water 1L,29,12,16
+Red Bull,13,8,57
+Orange Juice 1L,17,10,80
+Apple Juice 1L,11,8,35
+Grape Juice 1L,13,5,35
+Pomegranate Juice,16,13,74
+Apple Red,32,14,78
+Apple Green,47,40,75
+Apple Yellow,38,34,65
+Banana Bunch,38,21,9
+Orange Sweet,38,37,46
+Orange for Juice,34,8,97
+Grapes Red,26,24,47
+Grapes Green,28,13,44
+Watermelon Whole,12,9,6
+Melon Sweet,19,12,81
+Pineapple Whole,46,7,58
+Mango Shelly,37,24,67
+Papaya Large,25,16,37
+Avocado Haas,42,9,45
+Kiwi Green,18,6,79
+Pear Conference,43,31,61
+Peach Yellow,30,26,97
+Plum Purple,22,5,55
+Pomegranate Fresh,26,19,23
+Strawberry Box,29,27,70
+Tomato Cherry,40,12,42
+Tomato Classic,40,5,31
+Cucumber Israeli,45,41,99
+Cucumber Mini,47,27,77
+Lettuce Romaine,39,37,94
+Lettuce Iceberg,48,46,57
+Onion Yellow,21,17,92
+Onion Red,50,30,20
+Potato White,18,9,18
+Potato Red,45,38,27
+Sweet Potato,15,11,29
+Carrot Organic,44,31,70
+Garlic Pack,27,9,66
+Ginger Root,36,16,78
+Zucchini Green,26,16,96
+Eggplant Black,36,15,98
+Broccoli Fresh,21,15,51
+Cauliflower Medium,22,6,26
+Beet Root,43,6,5
+Radish Bunch,37,18,58
+Kale Leaves,46,22,15
+Spinach Bag,50,31,67
+Celery Stalk,11,5,47
+Parsley Fresh,19,18,76
+Coriander Fresh,10,5,36
+Mint Leaves,50,24,15
+Basil Fresh,30,15,16
+Thyme Fresh,26,22,32
+Oregano Dry,27,26,3
+Rosemary Sprigs,20,19,59
+Chicken Breast,24,23,6
+Chicken Thighs,43,8,15
+Ground Beef,46,32,32
+Beef Steak,29,27,68
+Beef Ribs,21,17,100
+Salmon Fillet,33,30,65
+Tilapia Whole,35,14,22
+Eggs Regular 12 Pack,16,8,21
+Eggs Omega 3,38,7,38
+Turkey Breast,34,26,4
+Milk 1L,12,5,31
+Milk 2L,21,17,33
+Soy Milk,26,10,22
+Almond Milk,43,40,69
+Oat Milk,35,15,100
+Butter 100g,22,13,31
+Butter 200g,36,33,7
+Cheese Yellow Block,46,27,92
+Cheese Cottage,27,14,32
+Cheese Feta,36,25,100
+Yogurt Plain,17,14,71
+Yogurt Strawberry,21,12,81
+Cream Cheese,49,43,37
+Sour Cream,22,8,16
+Whipping Cream,24,8,36
+Jam Strawberry,20,5,95
+Jam Apricot,44,35,84
+Honey Natural,28,23,82
+Peanut Butter Smooth,11,6,2
+Peanut Butter Crunchy,41,24,38
+Chocolate Spread,15,10,95
+Halva Spread,32,24,34
+Tuna Can,35,19,83
+Corn Can,25,21,50
+Green Beans Can,28,18,11
+Pickles Jar,16,14,39
+Olives Black,20,12,13
+Olives Green,44,26,56
+Tomato Paste,20,11,69
+Coconut Milk Can,38,24,24
+Chickpeas Can,37,29,27
+Red Beans Can,48,19,8
+Bread White,38,11,99
+Bread Whole Wheat,13,5,64
+Baguette French,36,8,98
+Pita Pack,12,7,81
+Lafa Flatbread,25,20,36
+Cake Chocolate,22,14,48
+Cake Marble,15,14,32
+Cookies Chocolate Chip,33,32,11
+Biscuits Tea,10,8,57
+Crackers Salted,11,8,59
+Crackers Whole Grain,45,13,32
+Croissant Butter,46,33,44
+Granola Mix,29,10,54
+Cereal Cornflakes,45,18,92
+Cereal Muesli,29,14,80
+Rice White,22,6,28
+Rice Basmati,28,23,66
+Pasta Spaghetti,36,30,68
+Pasta Penne,43,11,84
+Couscous,15,7,59
+Chips Classic,24,20,52
+Chips BBQ,42,14,67
+Chips Sour Cream,31,22,90
+Pretzels Bag,26,14,4
+Popcorn Microwave,28,17,52
+Ice Cream Vanilla,41,35,85
+Ice Cream Chocolate,30,19,16
+Ice Cream Strawberry,34,20,63
+Gummy Bears,17,10,52
+Sour Worms,49,42,49
+Chocolate Bar,21,9,66
+Chocolate Dark,43,17,51
+Waffles Vanilla,35,26,50
+Energy Bar,43,36,61
+Protein Bar,18,14,73
+Ketchup Bottle,16,10,91
+Mustard Dijon,21,20,72
+Barbecue Sauce,43,26,25
+Soy Sauce,45,12,65
+Hot Sauce,10,6,10
+Mayonnaise Jar,20,11,52
+Vinegar Apple,49,33,51
+Vinegar Balsamic,19,5,38
+Oil Canola,30,18,62
+Oil Sunflower,49,38,16
+Olive Oil Extra Virgin,10,6,81
+Salt,48,31,78
+Pepper Black,49,47,63
+Sugar White,37,28,36
+Brown Sugar,35,12,52
+Baking Powder,30,12,66
+Cocoa Powder,13,11,74
+Corn Starch,43,33,29
+Shampoo Regular,39,15,62
+Shampoo Anti Dandruff,48,36,46
+Conditioner,26,14,12
+Body Wash,30,28,22
+Soap Bar,35,5,53
+Hand Soap,47,23,94
+Toothpaste Mint,37,27,33
+Toothpaste Whitening,50,43,33
+Toothbrush Soft,43,13,10
+Mouthwash,39,7,14
+Deodorant Spray,27,5,37
+Toilet Paper 6 Pack,32,12,16
+Toilet Paper 12 Pack,14,6,77
+Tissues Box,39,20,91
+Napkins,46,43,99
+Dish Soap,11,8,66
+Floor Cleaner,42,22,38
+Window Cleaner,24,21,33
+Laundry Detergent,28,23,53
+Fabric Softener,25,6,90
+Sponge Pack,31,21,17
+Trash Bags,13,8,54
+Aluminum Foil,23,19,74
+Cling Wrap,49,31,71
+Paper Towels,15,11,84
+Pens Pack,31,28,16
+Markers Set,36,19,5
+Glue Stick,13,7,24
+Tape Roll,36,33,17
+Scissors,48,11,57
+Ruler 30cm,16,8,28
+Eraser,10,9,18
+Stapler,43,38,45
+Notebook Spiral,47,10,71
+Printer Paper 500,41,36,2

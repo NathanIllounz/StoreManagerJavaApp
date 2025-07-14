@@ -6,6 +6,8 @@ import algorithm.interfaces.IProductRecommendation;
 import dao.IDao;
 import model.Product;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class InventoryService {
     private IDao dao;
@@ -43,15 +45,16 @@ public class InventoryService {
         }
         return false;
     }
-    public List<Product> recommendLowStock() {
+    public List<Product> recommendLowStock(int limit) {
         IProductRecommendation algo = new LowStockRecommendation();
-        return algo.recommend(dao.loadProducts());
+        return algo.recommend(dao.loadProducts()).stream().limit(limit).collect(Collectors.toList());
     }
 
-    public List<Product> recommendHighProfit() {
+    public List<Product> recommendHighProfit(int limit) {
         IProductRecommendation algo = new HighProfitRecommendation();
-        return algo.recommend(dao.loadProducts());
+        return algo.recommend(dao.loadProducts()).stream().limit(limit).collect(Collectors.toList());
     }
+
 
     public Product findProductByName(String name) {
         List<Product> products = dao.loadProducts();

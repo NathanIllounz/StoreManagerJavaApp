@@ -38,7 +38,8 @@ public class HandleRequest {
                 return new Response(true, "Product list returned", products);
 
             case "RECOMMEND_LOW":
-                List<Product> low = service.recommendLowStock();
+                int lowLimit = Integer.parseInt(request.getTargetName()); // נניח שהוא שדה מספרי כמו "5"
+                List<Product> low = service.recommendLowStock(lowLimit);
                 String stockMsg = low.isEmpty()
                         ? "No products found with low stock."
                         : "Recommended to restock '" + low.get(0).getName() + "' — only " +
@@ -46,7 +47,8 @@ public class HandleRequest {
                 return new Response(true, stockMsg, low);
 
             case "RECOMMEND_PROFIT":
-                List<Product> high = service.recommendHighProfit();
+                int profitLimit = Integer.parseInt(request.getTargetName());
+                List<Product> high = service.recommendHighProfit(profitLimit);
                 String profitMsg = high.isEmpty()
                         ? "No products found for high profit recommendation."
                         : "Recommended to sell '" + high.get(0).getName() + "' — expected profit is " +

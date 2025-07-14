@@ -34,7 +34,7 @@ public class ClientApp extends Application {
         tabPane.getTabs().addAll(addTab, getAllTab, recommendationTab);
 
         VBox root = new VBox(tabPane);
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 400, 400);
         primaryStage.setTitle("Store Manager Client");
         primaryStage.setScene(scene);
         primaryStage.show();
