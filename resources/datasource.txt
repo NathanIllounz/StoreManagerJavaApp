@@ -1,5 +1,4 @@
 Coca Cola 1L,28,16,62
-Coca Cola 2L,23,6,4
 Diet Cola 1.5L,48,42,6
 Sprite 1L,20,10,15
 Sprite 2L,33,11,45

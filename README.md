@@ -51,11 +51,11 @@ Every update is automatically saved and reloaded.
 
 GUI screenshots here:
 
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
 
-<img alt="Algorithm Recomandation" height="400" src="img.png" width="300"/>
-<img alt="Add Product" height="400" src="img_1.png" width="300"/>
-<img alt="Show all product" height="400" src="img_2.png" width="300"/>
-<img alt="Search + Upadte/Delete Product" height="400" src="img_3.png" width="300"/>
 ## 👨‍💻 Author
 
 Nathan Illouz  
