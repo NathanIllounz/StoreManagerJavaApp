@@ -1,4 +1,4 @@
 name: nathan illouz
 Tz: 328587423
-team:solo
-link to video:
+team: solo
+link to video: https://www.youtube.com/watch?v=IjrpAjkaaX8&ab_channel=IllouznNathan
